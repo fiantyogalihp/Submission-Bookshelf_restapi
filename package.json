@@ -1,0 +1,23 @@
+{
+  "name": "bookshelf_restapi",
+  "version": "1.0.0",
+  "description": "Submission Bookshelf from www.dicoding.com",
+  "main": "./src/server.js",
+  "scripts": {
+    "lint": "eslint ./src",
+    "start-dev": "nodemon ./src/server.js",
+    "start-prod": "NODE_ENV=production node ./src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^20.2.2",
+    "nanoid": "^3.3.4",
+    "pm2": "^5.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.21.0",
+    "nodemon": "^2.0.19"
+  }
+}
