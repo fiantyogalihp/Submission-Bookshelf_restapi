@@ -1,4 +1,4 @@
-# [HAPIJS]
+# [HapiJS]
 
 # [READY TO UPLOAD] to AWS with Process Manager
 
