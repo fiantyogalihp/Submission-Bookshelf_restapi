@@ -4,15 +4,15 @@ A simple Bookshelf app backend [REST API] with AWS EC2 Instance, stay server act
 
 ## Create and Start server (in first time only)
 
-$ pm2 start npm --name "notes-api" -- run "start-prod"
+$ pm2 start npm --name "bookshelf-api" -- run "start-prod"
 
 ## Restart server
 
-$ pm2 restart notes-api
+$ pm2 restart bookshelf-api
 
 ## Stop server
 
-$ pm2 stop notes-api
+$ pm2 stop bookshelf-api
 
 ## Start server
 
