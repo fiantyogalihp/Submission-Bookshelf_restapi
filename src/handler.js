@@ -9,14 +9,7 @@ const addBookHandler = (req, h) => {
 
   let { reading = false } = req.payload;
 
-  let finished = false;
-
-  // let finished = false;
-  // let reading = false;
-
-  if (pageCount === readPage) finished = true;
-  // if (readPage > 0 && readPage < pageCount) reading = true;
-  // if (readPage === 0 || readPage === pageCount) reading = false;
+  const finished = readPage === pageCount;
 
   const insertedAt = new Date().toISOString();
   const updatedAt = insertedAt;
@@ -82,40 +75,38 @@ const addBookHandler = (req, h) => {
 };
 
 const getAllBooksHandler = (req, h) => {
-  const { name } = req.query;
-
-  let { reading, finished } = req.query;
+  const { name: qName, reading, finished } = req.query;
 
   let result = bookshelf;
 
   // ? Name query
-  if (name !== undefined) {
-    result = bookshelf.filter((book) =>
-      String(book.name).toLowerCase().includes(String(name).toLowerCase())
+  if (qName) {
+    result = result.filter((book) =>
+      book.name.toLowerCase().includes(qName.toLowerCase())
     );
   }
 
   // ? Reading query
-  if (reading !== undefined) {
-    result = bookshelf.filter((book) => book.reading === (reading === "1"));
+  if (reading) {
+    result = result.filter((book) => book.reading == Boolean(Number(reading)));
   }
 
   // ? Finished query
-  if (finished !== undefined) {
-    result = bookshelf.filter((book) => book.finished === (finished === "1"));
+  if (finished) {
+    result = result.filter(
+      (book) => book.finished == Boolean(Number(finished))
+    );
   }
-
-  const finalBooks = result.map((book) => ({
-    id: book.id,
-    name: book.name,
-    publisher: book.publisher,
-  }));
 
   const response = h
     .response({
       status: "success",
       data: {
-        books: finalBooks,
+        books: result.map((book) => ({
+          id: book.id,
+          name: book.name,
+          publisher: book.publisher,
+        })),
       },
     })
     .code(200);
@@ -127,7 +118,7 @@ const getBookByIdHandler = (req, h) => {
 
   const book = bookshelf.filter((b) => b.id === bookId)[0];
 
-  if (book !== undefined) {
+  if (book) {
     return {
       status: "success",
       data: {
@@ -153,12 +144,7 @@ const editBookByIdHandler = (req, h) => {
 
   let { reading } = req.payload;
 
-  let finished = false;
-
-  if (pageCount === readPage) finished = true;
-  // if (readPage > 0 && readPage < pageCount) reading = true;
-  // if (readPage === 0 || readPage === pageCount) reading = false;
-
+  const finished = readPage === pageCount;
   const updatedAt = new Date().toISOString();
 
   if (name === undefined || name === "") {
