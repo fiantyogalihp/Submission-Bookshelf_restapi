@@ -131,3 +131,6 @@ dist
 
 # Key AWS_ACCESS_KEY_ID
 notes-api-webserver.pem
+
+# Vagrant
+.vagrant

@@ -6,6 +6,7 @@ A simple Bookshelf app backend [REST API] with AWS EC2 Instance, stay server act
 
 ## Create and Start server (in first time only)
 
+NODE_PORT, NODE_ENV
 $ pm2 start npm --name "bookshelf-api" -- run "start-prod"
 
 ## Restart server
@@ -18,4 +19,4 @@ $ pm2 stop bookshelf-api
 
 ## Start server
 
-$ pm2 start notes-api
+$ pm2 start bookshelf-api
