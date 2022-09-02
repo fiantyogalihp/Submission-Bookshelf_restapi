@@ -37,7 +37,9 @@ const addBookHandler = (req, h) => {
       })
       .code(400);
     return response;
-  } else if (readPage > pageCount) {
+  }
+
+  if (readPage > pageCount) {
     const response = h
       .response({
         status: "fail",
@@ -239,6 +241,35 @@ const getDataByOtherMethodhandler = (req, h) => {
   return response;
 };
 
+const getFormatDatasHandler = (req, h) => {
+  const response = h
+    .response({
+      info: [
+        `server running on port: ${process.argv[2] || process.env.NODE_PORT}`,
+        `server running on host-ip: ${
+          process.argv[3] || process.env.NODE_PORT
+        }`,
+      ],
+      status: "success",
+      format_data: {
+        id: "Qbax5Oy7L8WKf74l",
+        name: "Buku A",
+        year: 2010,
+        author: "John Doe",
+        summary: "Lorem ipsum dolor sit amet",
+        publisher: "Dicoding Indonesia",
+        pageCount: 100,
+        readPage: 25,
+        finished: false,
+        reading: false,
+        insertedAt: "2021-03-04T09:11:44.598Z",
+        updatedAt: "2021-03-04T09:11:44.598Z",
+      },
+    })
+    .code(200);
+  return response;
+};
+
 module.exports = {
   addBookHandler,
   getAllBooksHandler,
@@ -246,4 +277,5 @@ module.exports = {
   editBookByIdHandler,
   deleteBookByIdHandler,
   getDataByOtherMethodhandler,
+  getFormatDatasHandler,
 };

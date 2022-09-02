@@ -5,6 +5,7 @@ const {
   editBookByIdHandler,
   deleteBookByIdHandler,
   getDataByOtherMethodhandler,
+  getFormatDatasHandler,
 } = require("./handler");
 
 const routes = [
@@ -22,6 +23,11 @@ const routes = [
     method: "*",
     path: "/{any*}",
     handler: getDataByOtherMethodhandler,
+  },
+  {
+    method: "GET",
+    path: "/",
+    handler: getFormatDatasHandler,
   },
   {
     method: "GET",
