@@ -1,7 +1,6 @@
 const { nanoid } = require("nanoid");
 const bookshelf = require("./bookshelf");
-const ip = require("ip");
-const os = require("os");
+// const privateIp = require("ip");
 
 const addBookHandler = (req, h) => {
   const { name, year, author, summary, publisher, pageCount, readPage } =
@@ -244,13 +243,15 @@ const getDataByOtherMethodhandler = (req, h) => {
 };
 
 const getFormatDatasHandler = (req, h) => {
+  // * Define Public API Server
+  var _publicIp = req.headers["x-forwarded-for"] || req.info.remoteAddress;
   const response = h
     .response({
-      info: `server running on host-ip: ${ip.address("", "ipv4")}`,
+      info: `server running on host-ip: ${_publicIp}`,
       status: "success",
       CreatedAt: new Date().toISOString(),
       Example_format_data: {
-        id: "Qbax5Oy7L8WKf74l",
+        id: nanoid(16),
         name: "Buku A",
         year: 2010,
         author: "John Doe",
