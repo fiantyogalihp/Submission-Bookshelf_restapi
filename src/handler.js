@@ -1,6 +1,7 @@
 const { nanoid } = require("nanoid");
 const bookshelf = require("./bookshelf");
 const ip = require("ip");
+const os = require("os");
 
 const addBookHandler = (req, h) => {
   const { name, year, author, summary, publisher, pageCount, readPage } =
@@ -245,10 +246,7 @@ const getDataByOtherMethodhandler = (req, h) => {
 const getFormatDatasHandler = (req, h) => {
   const response = h
     .response({
-      info: [
-        `server running on port: ${process.argv[2] || process.env.NODE_PORT}`,
-        `server running on host-ip: ${ip.address}`,
-      ],
+      info: `server running on host-ip: ${ip.address("", "ipv4")}`,
       status: "success",
       Example_format_data: {
         id: "Qbax5Oy7L8WKf74l",
