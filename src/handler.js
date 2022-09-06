@@ -248,6 +248,7 @@ const getFormatDatasHandler = (req, h) => {
     .response({
       info: `server running on host-ip: ${ip.address("", "ipv4")}`,
       status: "success",
+      CreatedAt: new Date().toISOString(),
       Example_format_data: {
         id: "Qbax5Oy7L8WKf74l",
         name: "Buku A",
